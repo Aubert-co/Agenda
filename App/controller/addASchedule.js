@@ -1,13 +1,17 @@
 module.exports = async function ApiAddSchedule(req,res){
     try{
         const {date,content} = req.body
-        const [year,month,day] = date.split('/')
-        const VerifyDate = (value,length)=>{
-            if(Number(value) && value.length === length )return true
+      
+        const VerifyDate = ()=>{
+            const [year,month,day] = date.split('/')
 
-            return false
+            if(!Number(year) && year.length !== 4 )return false
+            if(!Number(month) && month.length !== 2)return false
+            if(!Number(day) && day.length !== 2)return false
+            
+            return true
         }
-        if(date === '' || !VerifyDate(day,2) || !VerifyDate(year,4) || !VerifyDate(month,2)  )return res.status(400).send({msg:'invalid date'})
+        if(date === '' && !VerifyDate() )return res.status(400).send({msg:'invalid date'})
        
     
         if(content === '')return res.status(400).send({msg:'invalid content'})
