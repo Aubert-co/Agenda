@@ -10,6 +10,6 @@ server.use(express.json())
 server.use(rotas)
 
 
-server.listen(8080)
+
 
 module.exports = server
